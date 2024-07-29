@@ -7,6 +7,7 @@
 4) Provider State Mangement.
 5) use Remote Config Firebase.
 6) email masking.
+7) pagination.
 
 ## Sceenshots
 
