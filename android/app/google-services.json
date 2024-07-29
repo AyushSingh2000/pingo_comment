@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43972438277",
+    "project_id": "pingo-comment",
+    "storage_bucket": "pingo-comment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43972438277:android:40c85f06862a8e8da7ef6c",
+        "android_client_info": {
+          "package_name": "com.example.pingo_comment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ap6DSXcgnwAoboPABB9ztOY3MDkAsb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
