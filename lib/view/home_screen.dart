@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:pingo_comment/view/profile.dart';
 
-import '../view_model/comment_viewmodel.dart';
-import '../widgets/comment_tile.dart';
+import '../widgets/bottom_nav.dart';
+import 'commentList.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,13 +10,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<void> _fetchCommentsFuture;
+  int _selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchCommentsFuture =
-        Provider.of<CommentViewModel>(context, listen: false).fetchComments();
+  static List<Widget> _widgetOptions = <Widget>[
+    CommentsList(),
+    ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -31,29 +35,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         color: Color(0xFFF5F9FD),
-        child: FutureBuilder(
-          future: _fetchCommentsFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              print("FutureBuilder: waiting");
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              print("FutureBuilder: error - ${snapshot.error}");
-              return Center(child: Text('Failed to load comments'));
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              print("FutureBuilder: done");
-              final commentViewModel = Provider.of<CommentViewModel>(context);
-              return ListView.builder(
-                itemCount: commentViewModel.comments.length,
-                itemBuilder: (context, index) {
-                  return CommentTile(comment: commentViewModel.comments[index]);
-                },
-              );
-            } else {
-              return Center(child: Text('No comments found'));
-            }
-          },
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigator(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

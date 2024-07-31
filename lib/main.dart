@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:pingo_comment/services/remote_config_service.dart';
-import 'package:pingo_comment/view/auth/login_screen.dart';
+import 'package:pingo_comment/view/home_screen.dart';
 import 'package:pingo_comment/view_model/auth_viewmodel.dart';
 import 'package:pingo_comment/view_model/comment_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(fontFamily: 'Poppins'),
-        home: LoginPage(),
+        home: HomePage(),
       ),
     );
   }

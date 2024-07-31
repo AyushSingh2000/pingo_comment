@@ -5,25 +5,23 @@ import 'package:http/http.dart' as http;
 import '../models/comment_model.dart';
 
 class ApiService {
-  final String commentsUrl = 'https://jsonplaceholder.typicode.com/comments';
-
-  Future<List<CommentModel>> fetchComments() async {
+  static Future<List<CommentModel>> fetchComments(int page, int limit) async {
     try {
-      print("Making API request...");
-      final response = await http.get(Uri.parse(commentsUrl));
+      final response = await http.get(
+        Uri.parse(
+            'https://jsonplaceholder.typicode.com/comments?_page=$page&_limit=$limit'),
+      );
 
       if (response.statusCode == 200) {
-        print("API request successful.");
-        List<dynamic> data = json.decode(response.body);
-        return data.map((json) => CommentModel.fromJson(json)).toList();
+        Iterable jsonResponse = json.decode(response.body);
+        return List<CommentModel>.from(
+            jsonResponse.map((model) => CommentModel.fromJson(model)));
       } else {
-        print(
-            "Failed to load comments with status code: ${response.statusCode}");
-        throw Exception('Failed to load comments');
+        throw Exception('Failed to load comments: ${response.reasonPhrase}');
       }
     } catch (e) {
-      print("Error fetching comments from API: $e");
-      throw e;
+      print('Error fetching comments: $e');
+      throw Exception('Failed to load comments');
     }
   }
 }
