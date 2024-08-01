@@ -30,4 +30,14 @@ class CommentViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> fetchCommentsByPostId(int postId) async {
+    try {
+      final fetchedComments = await ApiService.fetchCommentsByPostId(postId);
+      _comments = fetchedComments;
+      notifyListeners();
+    } catch (e) {
+      print('Error fetching comments: $e');
+    }
+  }
 }

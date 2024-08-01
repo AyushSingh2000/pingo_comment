@@ -24,7 +24,7 @@ class BottomNavigator extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: 'Posts',
         ),
       ],
       currentIndex: selectedIndex,

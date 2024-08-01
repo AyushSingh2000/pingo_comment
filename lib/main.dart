@@ -5,6 +5,7 @@ import 'package:pingo_comment/services/remote_config_service.dart';
 import 'package:pingo_comment/view/home_screen.dart';
 import 'package:pingo_comment/view_model/auth_viewmodel.dart';
 import 'package:pingo_comment/view_model/comment_viewmodel.dart';
+import 'package:pingo_comment/view_model/profile_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => CommentViewModel()),
+        ChangeNotifierProvider(create: (_) => PostViewModel()),
         Provider<RemoteConfigService>.value(value: remoteConfigService),
       ],
       child: MaterialApp(
